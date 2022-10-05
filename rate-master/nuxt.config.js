@@ -68,7 +68,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.API,
+    baseURL: process.env.API || "http://localhost:3000",
     headers: {
       common: {
         Token: process.env.TOKEN

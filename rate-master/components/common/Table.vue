@@ -5,7 +5,7 @@
               <thead v-if="headers && headers.length > 0">
                   <tr>
                       <th v-for="(item, index) in headers">{{item.name}}</th>
-                  </tr>
+                 0 </tr>
               </thead>
               <tbody v-if="items && items.length > 0 && headers && headers.length > 0">
                 <tr v-for="(item, index) in items" class="h-14" :class="item.class">
@@ -46,7 +46,7 @@
             </table>
         </template>
     </div>
-      
+
 </template>
 
 <script>
@@ -99,7 +99,7 @@
   width: 100%;
   max-width: 1500px;
   position: relative;
-  border-collapse: collapse; 
+  border-collapse: collapse;
 }
 
 .positions-table__max {
@@ -135,13 +135,13 @@
 }
 
 .positions-table td:first-child {
-    border-top-left-radius: 20px; 
+    border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     padding-left: 30px;
 }
 .positions-table td:last-child {
-    border-bottom-right-radius: 20px; 
-    border-top-right-radius: 20px; 
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
     padding-right: 30px;
 }
 

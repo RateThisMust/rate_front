@@ -10,19 +10,19 @@
                 <div class="progress">
                     <div class="progress__item" :class="{'progress__item_check' : step >= 1}">
                         <div class="progress__wrap">
-                            <div class="progress__num">1</div>    
+                            <div class="progress__num">1</div>
                         </div>
                         <div class="progress__name">Модель работы</div>
                     </div>
                     <div class="progress__item" :class="{'progress__item_check' : step >= 2}">
                         <div class="progress__wrap">
-                            <div class="progress__num">2</div>    
+                            <div class="progress__num">2</div>
                         </div>
                         <div class="progress__name">Добавить выкупы</div>
                     </div>
                     <div class="progress__item" :class="{'progress__item_check' : step >= 3}">
                         <div class="progress__wrap">
-                            <div class="progress__num">3</div>    
+                            <div class="progress__num">3</div>
                         </div>
                         <div class="progress__name">График</div>
                     </div>
@@ -85,7 +85,7 @@
 
                 <div class="mt-12">
                     <template v-if="tItems.length == 0">
-                        <div class="result-empty">ЗДЕСЬ ПОКА НИЧЕГО</div> 
+                        <div class="result-empty">ЗДЕСЬ ПОКА НИЧЕГО</div>
                     </template>
                     <template v-else>
 
@@ -332,7 +332,7 @@
                     </div>
                     <div class="grow">
                         <template v-if="apiItems.length == 0">
-                            <div class="result-empty">ЗДЕСЬ ПОКА НИЧЕГО</div> 
+                            <div class="result-empty">ЗДЕСЬ ПОКА НИЧЕГО</div>
                         </template>
                         <template v-else>
                             <CommonTable :headers="apiHeaders" :items="apiItems" :loading="apiItemsLoading" class="h-96">
@@ -342,7 +342,7 @@
                                 <template v-slot:item.check="{ item }">
                                     <Checkbox v-model="item.check"/>
                                 </template>
-                                
+
                             </CommonTable>
                         </template>
                     </div>
@@ -395,7 +395,7 @@
                                         {{bulk.files[0]['name']}}
                                     </template>
                                 </template>
-                                
+
                                 <input type="file" @change="bulkFile" class="file-up" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                             </Button>
                         </div>
@@ -465,7 +465,7 @@ export default {
 
       // selectedDate: {
       //       startDate: new Date(),
-      //       endDate: 
+      //       endDate:
       //   },
 
         art:'',
@@ -515,14 +515,14 @@ export default {
         let text = ''
         return this.selectedDate
         // return text
-    },  
+    },
 
     artCount : function() {
         let arts = []
         for (var i = 0; i < this.tItems.length; i++) {
             let art = this.tItems[i]['art']
             if ( art ) {
-                arts.push( art ) 
+                arts.push( art )
             }
         }
         arts = _.uniq(arts)
@@ -533,7 +533,7 @@ export default {
         for (var i = 0; i < this.tItems.length; i++) {
             let count = parseInt(this.tItems[i]['count'], 10)
             if ( count ) {
-                counts.push( count ) 
+                counts.push( count )
             }
         }
         return _.sum(counts)
@@ -543,7 +543,7 @@ export default {
         for (var i = 0; i < this.tItems.length; i++) {
             let rcount = parseInt(this.tItems[i]['rcount'], 10)
             if ( rcount ) {
-                counts.push( rcount ) 
+                counts.push( rcount )
             }
         }
         return _.sum(counts)
@@ -552,10 +552,9 @@ export default {
         let sums = []
         for (var i = 0; i < this.tItems.length; i++) {
             let count = parseInt(this.tItems[i]['count'], 10)
-            let rcount = parseInt(this.tItems[i]['rcount'], 10)
             let price = parseInt(this.tItems[i]['price'], 10)
             if ( count && price ) {
-                sums.push( (count - rcount) * price ) 
+                sums.push( count * price )
             }
         }
         return _.sum(sums)
@@ -566,7 +565,7 @@ export default {
             let rcount = parseInt(this.tItems[i]['rcount'], 10)
             let price = parseInt(this.tItems[i]['price'], 10)
             if ( rcount && price ) {
-                sums.push( rcount * price ) 
+                sums.push( rcount * price )
             }
         }
         return _.sum(sums)
@@ -577,7 +576,7 @@ export default {
     rowClasses(item) {
         if (item.class) {
           return item.class;
-        } 
+        }
     },
 
     bulkFile: function( e ) {
@@ -596,7 +595,7 @@ export default {
             this.modalByApiShow = false
             this.apiItems = []
         }
-        
+
     },
 
     copy: function(index) {
@@ -650,7 +649,7 @@ export default {
         if ( this.bulk.type == 2 && !this.bulk.files ) {
             this.$toast.warning('Не выбран файл');
             return
-        } 
+        }
 
         if ( this.bulk.type == 1) {
             this.$store.dispatch('request/bulk_buffer', this.bulk).then((x) => {
@@ -681,7 +680,7 @@ export default {
             this.bulk.files.forEach((item, i) => {
                 formData.append(i, item)
             })
-            formData.append('type', this.bulk.type)   
+            formData.append('type', this.bulk.type)
 
             this.$store.dispatch('request/bulk_files', formData).then((x) => {
                 if (this.tHeaders.length == 0 && x.data.headers.length > 0) {
@@ -723,7 +722,7 @@ export default {
                 for (var i = x.data.msgs.length - 1; i >= 0; i--) {
                     this.$toast.error(x.data.msgs[i]);
                 }
-                
+
             }
         })
     },
@@ -735,8 +734,10 @@ export default {
         })
     },
     orderSave: function( type ) {
-        this.$store.dispatch('request/order_save', {items: this.orderItems, type: type, 'model' : this.model }).then((x) => {
+      console.log(this.orderItems)
+      this.$store.dispatch('request/order_save', {items: this.orderItems, type: type, 'model' : this.model }).then((x) => {
             if ( !x.data.error ) {
+
                 this.$toast.success(x.data.msg);
                 this.orderItems = []
                 this.tItems = []
@@ -752,7 +753,14 @@ export default {
         this.$store.dispatch('request/find_wb', this.findWbParams).then((x) => {
             this.apiItemsLoading = false
             if ( !x.data.error ) {
-                this.apiItems  = x.data.items
+              console.log(x);
+              this.apiItems = []
+              for(let i = 0; i < x.data.items.length; i++){
+                if(x.data.items[i]['rcount'] > 0){
+                  this.apiItems.push(x.data.items[i])
+                }
+
+              }
                 this.apiHeaders = x.data.headers
             } else {
                 this.$toast.error(x.data.msg);
@@ -780,7 +788,7 @@ export default {
 }
 
 .progress__item.progress__item_check {
- filter: grayscale(0); 
+ filter: grayscale(0);
 }
 
 .progress__num {
@@ -797,14 +805,14 @@ export default {
   line-height: 34px;
   text-align: center;
   position: relative;
-  z-index: 100; 
+  z-index: 100;
 }
 .progress__wrap {
   position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 8px; 
+  gap: 8px;
 }
 .progress__wrap:before {
   content: '';

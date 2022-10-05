@@ -1,5 +1,5 @@
 <template>
-  
+
     <div class="md:container md:mx-auto">
         <div class="bg-white rounded-3xl mt-2.5 mx-2.5 p-2.5 md:p-7 pb-20">
             <div class="">
@@ -77,8 +77,8 @@
                         <div>
                             <div class="content-title content-title_2">Добавление пользователей</div>
                             <div>В данном разделе вы можете добавить пользователя, ограничить его по правам доступа</div>
-                        </div>      
-                        
+                        </div>
+
                         <div>
                             <button class="w-full md:w-52 p-2.5 teal lighten-2 text-2xl text-gray-800 rounded" @click="userAdd = true">Добавить</button>
                         </div>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="mt-4">
                     <template v-if="tItems.length == 0">
-                        <div class="result-empty">ЗДЕСЬ ПОКА НИЧЕГО</div> 
+                        <div class="result-empty">ЗДЕСЬ ПОКА НИЧЕГО</div>
                     </template>
                     <template v-else>
                       <v-data-table
@@ -111,7 +111,7 @@
                                   <v-icon dense>mdi-help</v-icon>
                                 </v-btn>
                               </template>
-                              
+
                               <div>
                                   <span><span class="font-bold">Полный доступ</span> - может оформлять заявки, покупать услуги, добавлять или удалять пользователей, назначать роли, кроме владельца.</span>
                                   <v-divider class="my-2"></v-divider>
@@ -126,7 +126,7 @@
                         </template>
 
                         <template v-slot:item.role="{ item, index }">
-                            <v-select 
+                            <v-select
                                 :items="opt_roles"
                                 v-model="item.role"
                                 outlined
@@ -166,7 +166,7 @@
                     </v-btn>
                 </div>
 
-                <div class="content-title text-center">Добавление пользователя</div>    
+                <div class="content-title text-center">Добавление пользователя</div>
                 <div class="mt-4">
                   <v-text-field
                     label="ИМЯ"
@@ -193,7 +193,7 @@
                   ></v-text-field>
                 </div>
                 <div class="mt-4">
-                    <v-select 
+                    <v-select
                         :items="opt_roles"
                         v-model="unew.role"
                         outlined
@@ -273,12 +273,10 @@ export default {
 
     },
     save() {
-        this.$store.dispatch('request/auth_user_save', this.user_new).then((x) => {
-          if ( !x.data.error ) {
-            this.$toast.success('Данные сохранены')
-          } else {
-              this.$toast.error(x.data.error)
-          }
+      console.log(1)
+      console.log(this.user_new)
+        this.$store.dispatch('request/auth_user_save', {}).then((x) => {
+
         })
     },
     user_parent_get(){

@@ -69,14 +69,14 @@ export default {
 
   watch: {
     model: function(val) {
-      this.list()          
+      this.list()
     },
   },
   methods: {
     rowClasses(item) {
         if (item.class) {
           return item.class;
-        } 
+        }
     },
     showGroup: function( group ) {
       this.$router.push('/buyout/plan/' + group)
@@ -110,7 +110,7 @@ export default {
         })
     },
 
-    
+
   },
   mounted() {
     this.list()
