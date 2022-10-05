@@ -275,7 +275,7 @@ export default {
     save() {
       console.log(1)
       console.log(this.user_new)
-        this.$store.dispatch('request/auth_user_save', {}).then((x) => {
+        this.$store.dispatch('request/auth_user_save', this.user_new).then((x) => {
 
         })
     },

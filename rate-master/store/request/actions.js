@@ -12,7 +12,7 @@ export default {
 
   set_timeisout({ commit }, timeIsOut) {
     commit('SET_TIMEISOUT', timeIsOut)
-  },  
+  },
 
 
 
@@ -20,6 +20,15 @@ export default {
     return new Promise((resolve, reject) => {
       this.$axios
         .get('positions/')
+        .then((x) => {
+          resolve(x)
+        })
+    })
+  },
+  get_notification({ commit }) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get('get_notification/')
         .then((x) => {
           resolve(x)
         })
@@ -220,6 +229,8 @@ export default {
       this.$axios
         .post('auth/user/save/', state)
         .then((x) => {
+          console.log("req")
+          console.log(x)
           commit('SET_USER', x.data.data.user)
           resolve(x)
         })
@@ -252,7 +263,7 @@ export default {
           resolve(x)
         })
     })
-  },  
+  },
   dadata_search({ commit }, state) {
     return new Promise((resolve, reject) => {
       this.$axios
